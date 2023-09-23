@@ -9,7 +9,7 @@ import pages.MainPage;
 
 import static testdata.UsersList.USER1;
 
-public class FirstTest extends Driver {
+public class RegistrationTests extends Driver {
 
     @Test
     @Tag("Регистрация пользователя")
