@@ -5,17 +5,13 @@ import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.chrome.ChromeOptions;
-import testdata.Config;
-import testdata.Props;
 
 
-public class WebHooks {
-
-    public static Props props = new Config();
+public class Driver {
 
     @BeforeEach
     public void setupDriver() {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/webdrivers/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--disable-infobars",
                 "--incognito",

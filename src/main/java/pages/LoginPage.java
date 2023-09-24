@@ -82,10 +82,4 @@ public class LoginPage extends MainPage {
         );
         return this;
     }
-
-    @Step("Выход из профиля")
-    public LoginPage userLogOut() {
-        aWithText("Log Out").click();
-        return this;
-    }
 }
