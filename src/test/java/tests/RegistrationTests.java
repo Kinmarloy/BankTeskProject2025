@@ -5,7 +5,7 @@ import helpers.WebHooks;
 import org.junit.jupiter.api.*;
 import pages.LoginPage;
 
-import static testdata.Props.props;
+import static configs.Props.props;
 import static testdata.UsersList.USER1;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)

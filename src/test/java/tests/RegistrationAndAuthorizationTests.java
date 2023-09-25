@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.LoginPage;
 
-import static testdata.Props.props;
+import static configs.Props.props;
 import static testdata.UsersList.USER1;
 
 public class RegistrationAndAuthorizationTests extends WebHooks {
