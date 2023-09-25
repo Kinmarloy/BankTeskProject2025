@@ -5,13 +5,9 @@ import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.chrome.ChromeOptions;
-import testdata.Config;
-import testdata.Props;
 
 
 public class WebHooks {
-
-    public static Props props = new Config();
 
     @BeforeEach
     public void setupDriver() {
