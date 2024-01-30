@@ -1,6 +1,5 @@
 package pages;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
@@ -8,6 +7,7 @@ import testdata.UsersList;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static commonelements.AHref.aWithText;
 import static commonelements.Input.inputName;
@@ -15,25 +15,30 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class LoginPage extends MainPage {
-    public SelenideElement loginField = $x("//input[@name='username']").as("Поле ввода логина");
-    public SelenideElement passField = $x("//input[@name='password']").as("Поле ввода пароля");
-    public SelenideElement loginBtn = $x("//input[@type='submit']").as("Кнопка авторизации");
-    public SelenideElement registrationAndRecoveryBtn = $x("(//input[@type='submit'])[2]")
+
+    //region Selenide элементы для объекта страницы
+    private final SelenideElement loginField = $x("//input[@name='username']").as("Поле ввода логина");
+    private final SelenideElement passField = $x("//input[@name='password']").as("Поле ввода пароля");
+    private final SelenideElement loginBtn = $x("//input[@type='submit']").as("Кнопка авторизации");
+    private final SelenideElement registrationAndRecoveryBtn = $x("(//input[@type='submit'])[2]")
             .as("Кнопка регистрации");
-    public SelenideElement successText = $x("//h1/following-sibling::p")
+    private final SelenideElement successText = $x("//h1/following-sibling::p")
             .as("Текст с результатом регистрации");
 
-    public SelenideElement userLoginInfo = $x("(//h1/following-sibling::p)[2]")
+    private final SelenideElement userLoginInfo = $x("(//h1/following-sibling::p)[2]")
             .as("Текст с результатом регистрации");
-    public SelenideElement welcomeMessage = $x("//p[@class='smallText']")
+    private final SelenideElement welcomeMessage = $x("//p[@class='smallText']")
             .as("Приветственное сообщение с Именем и Фамилией пользователя");
+    //endregion
+
+    public static final String ERROR_MESSAGE = "Текст с результатом регистрации не совпадает";
 
     @Step("Авторизация под логином")
     public LoginPage login(UsersList user) {
         loginField.sendKeys(user.getUsername());
         passField.sendKeys(user.getPassword());
         loginBtn.click();
-        welcomeMessage.shouldBe(Condition.visible, Duration.ofSeconds(10));
+        welcomeMessage.shouldBe(visible, Duration.ofSeconds(10));
         assertEquals(welcomeMessage.getText(),
                 "Welcome " + user.getFirstName() + " " + user.getLastName(),
                 "Авторизация под пользователем не успешна");
@@ -56,8 +61,7 @@ public class LoginPage extends MainPage {
         inputName("repeatedPassword", "Подтверждение пароля").sendKeys(user.getPassword());
         registrationAndRecoveryBtn.click();
         assertEquals(successText.getText(),
-                "Your account was created successfully. You are now logged in.",
-                "Текст с результатом регистрации не совпадает");
+                "Your account was created successfully. You are now logged in.", ERROR_MESSAGE);
         return this;
     }
 
@@ -74,11 +78,9 @@ public class LoginPage extends MainPage {
         registrationAndRecoveryBtn.click();
         Assertions.assertAll(
                 () -> assertEquals("Your login information was located successfully. You are now logged in.",
-                        successText.getText(),
-                        "Текст с результатом регистрации не совпадает"),
+                        successText.getText(), ERROR_MESSAGE),
                 () -> assertEquals("Username: " + user.getUsername() + "\n" + "Password: " + user.getPassword(),
-                        userLoginInfo.getText(),
-                        "Текст с результатом регистрации не совпадает")
+                        userLoginInfo.getText(), ERROR_MESSAGE)
         );
         return this;
     }
