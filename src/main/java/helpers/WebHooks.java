@@ -11,7 +11,7 @@ public class WebHooks {
 
     @BeforeEach
     public void setupDriver() {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/webdrivers/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver133.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--disable-infobars",
                 "--incognito",
