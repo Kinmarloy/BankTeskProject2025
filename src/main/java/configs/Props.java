@@ -6,7 +6,7 @@ import org.aeonbits.owner.Reloadable;
 
 @Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
-        "src/test/resources/test.properties"
+        "classpath:test.properties"
 })
 public interface Props extends Reloadable{
 
