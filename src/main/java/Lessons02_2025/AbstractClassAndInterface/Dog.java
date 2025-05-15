@@ -1,6 +1,6 @@
 package Lessons02_2025.AbstractClassAndInterface;
 
-public class Dog extends Animal{
+public class Dog implements AbleToMakeSound{
 //    public void makeSound() {
 //        System.out.println("Make sound");
 //    }
